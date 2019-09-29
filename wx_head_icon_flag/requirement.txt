@@ -1,0 +1,8 @@
+certifi==2019.9.11
+chardet==3.0.4
+idna==2.8
+numpy==1.17.2
+Pillow==6.1.0
+pypng==0.0.20
+requests==2.22.0
+urllib3==1.25.6

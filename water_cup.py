@@ -50,8 +50,7 @@ class Water_cup:
     def fill(self, n):
         '''
         向 cup 灌水
-        n: 灌水数量，不指定则灌满水杯
-        from_cup：从from_cup 向当前杯注水，灌满当前杯或者from_cup灌完即止
+        n: 灌水的数量，或者是一个杯子，会一直灌到当前杯子满或者水源杯子空为止
         '''
         if isinstance(n, Water_cup):
             from_cup = n
@@ -79,6 +78,13 @@ class Water_cup:
         return self._water
 
     def get_n_water(self, n = 1):
+        '''
+        从杯子里取出水
+        n: 取出水的数量
+
+        return:
+            int 取出的水量，<= n
+        '''
         if self._water >= n:
             self._water -=n 
             return n

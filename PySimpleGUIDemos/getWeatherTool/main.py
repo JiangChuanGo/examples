@@ -4,7 +4,9 @@ import json
 
 def get_weather(city):
     # 在线环境不支持中文输入，所以我改用城市编号的接口，如果你在电脑上开发，就不受影响
-    r = requests.get("http://wthrcdn.etouch.cn/weather_mini?citykey=" + city)
+    # 注释掉旧接口，不再使用城市编码查询天气
+    # r = requests.get("http://wthrcdn.etouch.cn/weather_mini?citykey=" + city)
+    r = requests.get("http://wthrcdn.etouch.cn/weather_mini?city=" + city)
     result = json.loads(r.text)
     return result["data"]["forecast"][0]["type"]
 
@@ -14,9 +16,10 @@ sg.SetOptions(text_justification='center')
 
 # 蓝图不需要放到循环中
 layout = [ 
-           [ sg.Text("City", size = (20, 1)), sg.Input(key = "-CITY-") ],
-           [ sg.Text("Weather", size = (20, 1)), sg.Input(key = "-WEATHER-") ],
-           [ sg.Button("Submit")]
+           #[ sg.Text("City", size = (20, 1)), sg.Input(key = "-CITY-") ],
+           [ sg.Text("City", size = (20, 1)), sg.Combo(("北京", "上海", "深圳"), size=(10, 1), default_value="上海", change_submits=True, key = "-CITY-")],
+           [ sg.Text("Weather", size = (20, 1)), sg.Input(key = "-WEATHER-") ] #,
+           #[ sg.Button("Submit")]
          ]
 
 # 视窗也只需要创建一次，不要放到循环里

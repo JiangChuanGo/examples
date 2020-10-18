@@ -45,7 +45,7 @@ layout = [
                 sg.Text("省", size = (20, 1)), sg.Combo(provinces, size=(10, 1), default_value=provinces[0], change_submits=True, key = "-PROVINCE-"),
                 sg.Text("市", size = (20, 1)), sg.Combo(province_city[provinces[0]], default_value=province_city[provinces[0]][0], size=(10, 1), change_submits=True, key = "-CITY-")
            ],
-           [ sg.Text("Weather", size = (20, 1)), sg.Input(key = "-WEATHER-") ] #,
+           [ sg.Text("Weather", size = (20, 1)), sg.Input(key = "-WEATHER-") ]
          ]
 
 # 视窗也只需要创建一次，不要放到循环里

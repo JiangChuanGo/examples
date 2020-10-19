@@ -75,7 +75,7 @@ while True:
         citys = province_city[province]
 
         # 更新市列表，不要忘记更新默认值
-        window["-CITY-"].Update(values = citys, set_to_index=0, value=citys[0])
+        window["-CITY-"].Update(values = citys, set_to_index=0)
     
         # 为默认选项，更新天气
         city = citys[0]

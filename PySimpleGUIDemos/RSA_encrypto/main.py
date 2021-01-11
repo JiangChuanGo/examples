@@ -103,11 +103,11 @@ create_local_keys()
 
 ev, val = show_titled_popup("请将下面的公钥发给对方", GLOBAL_CTX["pub_pk"])
 
-if "OK" != ev:
+if ev in (None, 'Cancel'):
     exit()
 
 ev, val = show_titled_popup("请填写对方的公钥：", "")
-if "OK" != ev:
+if ev in (None, 'Cancel'):
     exit()
 
 update_remote_pub(val[0])

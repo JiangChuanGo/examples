@@ -52,3 +52,4 @@ while True:
 
 # 当退出循环的时候，就是程序退出之时，关掉 window
 window.close()
+

@@ -26,6 +26,7 @@ alert = sg.popup_ok
 
 # 布局
 layout = [
+        [sg.Text("填写消息或者对方发来的密文:")],
         [sg.Multiline("", key='-TEXT-PAD-',  size=(50,20), enable_events=True)],
         [sg.Button("加 密", key="-ACT-"), sg.Button("退出", key="QUIT")]
     ]
@@ -69,8 +70,13 @@ def create_local_keys():
 
 # 更新对方公钥记录，用于处理对方发来的公钥信息
 def update_remote_pub(pub_pk):
-    GLOBAL_CTX["remote_pub_pk"] = pub_pk
-    GLOBAL_CTX["remote_pub"] = rsa.PublicKey.load_pkcs1(pub_pk)
+    try:
+        GLOBAL_CTX["remote_pub_pk"] = pub_pk
+        GLOBAL_CTX["remote_pub"] = rsa.PublicKey.load_pkcs1(pub_pk)
+    except:
+        return False
+
+    return True
 
 
 # 解密消息
@@ -106,11 +112,17 @@ ev, val = show_titled_popup("请将下面的公钥发给对方", GLOBAL_CTX["pub
 if ev in (None, 'Cancel'):
     exit()
 
-ev, val = show_titled_popup("请填写对方的公钥：", "")
-if ev in (None, 'Cancel'):
+for count in range(3):
+    ev, val = show_titled_popup("请填写对方的公钥：", "")
+    if ev in (None, 'Cancel'):
+        exit()
+    
+    if update_remote_pub(val[0]):
+        break
+    alert("错误!", "好像是错误的公钥.")
+else:
+    alert("试了很多次了，请重新打开程序试试吧。")
     exit()
-
-update_remote_pub(val[0])
 
 
 
